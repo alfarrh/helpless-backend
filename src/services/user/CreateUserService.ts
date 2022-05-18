@@ -1,7 +1,8 @@
 import { User } from '@prisma/client';
-import { prisma } from '../../../prisma/client';
-import { CreateUserDTO } from '../dto/CreateUserDTO';
+import { prisma } from '../../prisma/client';
+import { CreateUserDTO } from './dto/CreateUserDTO';
 import { hash } from 'bcryptjs';
+import AppError from '../../errors/AppError';
 
 class CreateUserService {
   async execute({ name, email, password }: CreateUserDTO): Promise<User> {
@@ -12,7 +13,7 @@ class CreateUserService {
       },
     });
     if (userAlreadyExists) {
-      throw new Error('Email address already used.');
+      throw new AppError('Email address already used.');
     }
     //criptografar senha
     const hashedPassword = await hash(password, 8);

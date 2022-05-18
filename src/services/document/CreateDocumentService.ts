@@ -1,6 +1,7 @@
 import { Document } from '@prisma/client';
-import { prisma } from '../../../prisma/client';
-import { CreateDocumentDTO } from '../dtos/CreateDocumentDTO';
+import { prisma } from '../../prisma/client';
+import { CreateDocumentDTO } from './dtos/CreateDocumentDTO';
+import AppError from '../../errors/AppError';
 
 class CreateDocumentService {
   async execute({
@@ -14,7 +15,7 @@ class CreateDocumentService {
     const user = await prisma.user.findUnique({ where: { id: userId } });
 
     if (!user) {
-      throw new Error('O usuário não existe.');
+      throw new AppError('O usuário não existe.');
     }
     //criar o documento
     const document = await prisma.document.create({
