@@ -17,16 +17,12 @@ docker run --name postgres --restart unless-stopped -p 5432:5432 -e POSTGRES_PAS
 
 ### 🔧 Instalação
 
-Crie um arquivo `.env` na raiz do aplicativo e crie uma variavel de ambiente `DATABASE_URL` para o BD, exemplo:
+Crie um arquivo `.env` na raiz do aplicativo e contendo DATABASE_URL e APP_SECRET.
+
+Execute os comandos:
 ```
-DATABASE_URL="postgres://{user}:{password}@{hostname}:{port}/{database-name}?schema={schema-name}"
-```
-Crie o modelos e relacionamentos do banco de dados usando o Prisma, executando o comando:
-```
+yarn install
 yarn db:migrate
-```
-Por fim, compile e rode o app na sua máquina local, comando:
-```
 yarn dev
 ```
 
