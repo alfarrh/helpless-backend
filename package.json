@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --inspect --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
+    "start": "node dist/shared/infra/http/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --exit-child --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "db:migrate": "yarn prisma migrate dev"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "prettier": "^2.6.2",
     "prisma": "^3.14.0",
     "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.6.4"
   },
   "dependencies": {
@@ -31,6 +33,11 @@
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
-    "multer": "^1.4.4"
+    "multer": "^1.4.4",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.7.0"
+  },
+  "prisma": {
+    "schema": "src/shared/infra/db/schema.prisma"
   }
 }
