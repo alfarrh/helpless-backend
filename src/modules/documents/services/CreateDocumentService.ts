@@ -38,6 +38,7 @@ class CreateDocumentService {
         userId: userId,
         title,
         group,
+        activity,
         points,
         hours,
         description,
