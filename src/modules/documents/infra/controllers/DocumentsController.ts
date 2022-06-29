@@ -4,14 +4,17 @@ import ShowDocumentsListService from '@modules/documents/services/ShowDocumentsL
 
 export default class DocumentsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { userId, title, group, hours, description } = request.body;
+    const { userId, title, activity, group, points, hours, description } =
+      request.body;
 
     const createDocument = new CreateDocumentService();
 
     const document = await createDocument.execute({
       userId,
       title,
+      activity,
       group,
+      points,
       hours,
       description,
     });

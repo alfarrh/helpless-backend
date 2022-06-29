@@ -2,12 +2,15 @@ import { Document } from '@prisma/client';
 import { prisma } from '@shared/infra/db/prisma/client';
 import { CreateDocumentDTO } from '../dtos/CreateDocumentDTO';
 import AppError from '@shared/errors/AppError';
+import CalculatePoints from './CalculatePoints';
 
 class CreateDocumentService {
   async execute({
     userId,
     title,
+    activity,
     group,
+    points,
     hours,
     description,
   }: CreateDocumentDTO): Promise<Document> {
@@ -17,12 +20,25 @@ class CreateDocumentService {
     if (!user) {
       throw new AppError('O usuário não existe.');
     }
-    //criar o documento
+    //calcular pontos
+    const pointsCalculator = new CalculatePoints();
+
+    points = await pointsCalculator.calculate({
+      activity,
+      group,
+      hours,
+    });
+
+    if (!points) {
+      throw new AppError('Dados de pontuação incorretos.');
+    }
+    //passar pro banco
     const document = await prisma.document.create({
       data: {
         userId: userId,
         title,
         group,
+        points,
         hours,
         description,
       },
