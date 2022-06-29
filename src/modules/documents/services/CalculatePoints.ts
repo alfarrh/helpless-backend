@@ -57,7 +57,7 @@ export default class CalculatePoints {
             else return points;
           case '3':
             points = 5 * Number(hours);
-            if (points >= 50) return 0;
+            if (points >= 50) return 50;
             else return points;
           case '4':
             return 30;
