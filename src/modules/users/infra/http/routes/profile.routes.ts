@@ -4,6 +4,6 @@ import ProfileController from '@modules/users/infra/controllers/ProfileControlle
 const profileRouter = Router();
 const profileController = new ProfileController();
 
-profileRouter.post('/', profileController.show);
+profileRouter.get('/', profileController.show);
 
 export default profileRouter;
