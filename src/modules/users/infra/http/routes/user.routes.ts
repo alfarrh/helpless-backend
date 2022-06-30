@@ -1,4 +1,4 @@
-import { request, response, Router } from 'express';
+import { Router } from 'express';
 import ensureAuthenticathed from '@modules/users/infra/middlewares/ensureAuthenticathed';
 import multer from 'multer';
 import uploadConfig from '@config/upload';

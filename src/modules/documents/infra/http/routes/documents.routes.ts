@@ -3,22 +3,22 @@ import ensureAuthenticathed from '@modules/users/infra/middlewares/ensureAuthent
 import { container } from 'tsyringe';
 import uploadConfig from '@config/upload';
 import multer from 'multer';
-
+import UpdateDocumentController from '../../controllers/UpdateDocumentController';
 import DocumentsController from '../../controllers/DocumentsController';
 
 const documentRouter = Router();
-documentRouter.use(ensureAuthenticathed);
 const upload = multer(uploadConfig);
+const documentsController = new DocumentsController();
+const updateDocumentsController = container.resolve(UpdateDocumentController);
 
-const documentsController = container.resolve(DocumentsController);
+documentRouter.use(ensureAuthenticathed);
 
 documentRouter.get('/', documentsController.index);
 documentRouter.post('/', documentsController.create);
 documentRouter.patch(
-  '/',
-  ensureAuthenticathed,
+  '/file',
   upload.single('document'),
-  documentsController.update,
+  updateDocumentsController.update,
 );
 
 export default documentRouter;

@@ -9,6 +9,7 @@ export default class DiskStorageProvider implements IStorageProvider {
       path.resolve(uploadConfig.tmpFolder, file),
       path.resolve(uploadConfig.uploadsFolder, file),
     );
+
     return file;
   }
   public async deleteFile(file: string): Promise<void> {

@@ -20,10 +20,12 @@ class UpdateUserAvatar {
     if (!user) {
       throw new AppError('Only authenticated users can change avatar.', 401);
     }
+
     //Deletar avatar anterior
     if (user.avatar) {
       await this.storageProvider.deleteFile(user.avatar);
     }
+
     const filename = await this.storageProvider.saveFile(avatarFilename);
 
     user.avatar = filename;
@@ -36,6 +38,7 @@ class UpdateUserAvatar {
         avatar: user.avatar,
       },
     });
+
     return user;
   }
 }
