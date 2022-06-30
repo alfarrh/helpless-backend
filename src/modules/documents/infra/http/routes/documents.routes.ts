@@ -20,5 +20,6 @@ documentRouter.patch(
   upload.single('document'),
   updateDocumentsController.update,
 );
+documentRouter.delete('/', updateDocumentsController.delete);
 
 export default documentRouter;

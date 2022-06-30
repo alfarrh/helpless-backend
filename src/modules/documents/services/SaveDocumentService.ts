@@ -23,9 +23,11 @@ class SaveDocumentService {
       throw new AppError('Document does not exist.');
     }
     //Deletar doc anterior
+
     if (document?.doc) {
       await this.storageProvider.deleteFile(document.doc);
     }
+
     const filename = await this.storageProvider.saveFile(documentFilename);
 
     document.doc = filename;

@@ -3,7 +3,7 @@ import ShowProfileService from '@modules/users/services/ShowProfileService';
 
 export default class ProfileController {
   public async read(request: Request, response: Response): Promise<Response> {
-    const { userId } = request.body;
+    const userId = String(request.query.id);
 
     const showProfile = new ShowProfileService();
 
